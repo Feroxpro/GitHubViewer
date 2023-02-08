@@ -12,6 +12,7 @@ class SignUpViewController: UIViewController {
     
     let restManager = RestManager()
     let signUpVS = SignUpViewScreen()
+    let viewModel = ConfirmationViewModel()
     
     override func loadView() {
         self.view = self.signUpVS
@@ -20,13 +21,21 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.signUpVS.delegate(delegate: self)
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+            view.addGestureRecognizer(tap)
     }
 }
 
 
 extension SignUpViewController: SignUpProtocol  {
-    func actionSendButton() {
+    
+    func datePickerValueChanged() {
         
+    }
+    
+    
+    func actionSendButton() {
+        viewModel.fieldConfirmations()
     }
     
     func actionPickerProfilePhoto() {

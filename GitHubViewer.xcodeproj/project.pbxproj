@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		1B143AA9298F7502008B8726 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B143AA8298F7502008B8726 /* SignUpViewController.swift */; };
 		1B143AAB298F76BF008B8726 /* SignUpViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B143AAA298F76BF008B8726 /* SignUpViewScreen.swift */; };
-		1B143AAD298F9085008B8726 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B143AAC298F9085008B8726 /* User.swift */; };
 		1B6299C3298FA0810022C529 /* ImagePicker+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6299C2298FA0810022C529 /* ImagePicker+Extensions.swift */; };
 		1B6299CA2990234A0022C529 /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6299C92990234A0022C529 /* ForgotViewController.swift */; };
 		1B6299CC299023650022C529 /* ForgotViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6299CB299023650022C529 /* ForgotViewScreen.swift */; };
 		1B6299D52990377C0022C529 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1B6299D42990377C0022C529 /* Alamofire */; };
 		1B6299D8299037BA0022C529 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6299D7299037BA0022C529 /* RestManager.swift */; };
 		1B6299DA299040640022C529 /* ReCaptcha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6299D9299040640022C529 /* ReCaptcha.swift */; };
+		1BF629742993370B00FFD81D /* ConfirmationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF629732993370B00FFD81D /* ConfirmationsViewModel.swift */; };
 		1BF6F452298DED8600641526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF6F451298DED8600641526 /* AppDelegate.swift */; };
 		1BF6F454298DED8600641526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF6F453298DED8600641526 /* SceneDelegate.swift */; };
 		1BF6F456298DED8600641526 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF6F455298DED8600641526 /* SignInViewController.swift */; };
@@ -28,12 +28,12 @@
 /* Begin PBXFileReference section */
 		1B143AA8298F7502008B8726 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1B143AAA298F76BF008B8726 /* SignUpViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewScreen.swift; sourceTree = "<group>"; };
-		1B143AAC298F9085008B8726 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B6299C2298FA0810022C529 /* ImagePicker+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePicker+Extensions.swift"; sourceTree = "<group>"; };
 		1B6299C92990234A0022C529 /* ForgotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewController.swift; sourceTree = "<group>"; };
 		1B6299CB299023650022C529 /* ForgotViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewScreen.swift; sourceTree = "<group>"; };
 		1B6299D7299037BA0022C529 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		1B6299D9299040640022C529 /* ReCaptcha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReCaptcha.swift; sourceTree = "<group>"; };
+		1BF629732993370B00FFD81D /* ConfirmationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationsViewModel.swift; sourceTree = "<group>"; };
 		1BF6F44E298DED8600641526 /* GitHubViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BF6F451298DED8600641526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BF6F453298DED8600641526 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +60,6 @@
 		1B143AA5298F74D6008B8726 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1B143AAC298F9085008B8726 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -77,6 +76,7 @@
 		1B143AA7298F74E4008B8726 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1BF629732993370B00FFD81D /* ConfirmationsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -316,8 +316,8 @@
 				1B6299CA2990234A0022C529 /* ForgotViewController.swift in Sources */,
 				1B6299CC299023650022C529 /* ForgotViewScreen.swift in Sources */,
 				1BF6F452298DED8600641526 /* AppDelegate.swift in Sources */,
+				1BF629742993370B00FFD81D /* ConfirmationsViewModel.swift in Sources */,
 				1BF6F454298DED8600641526 /* SceneDelegate.swift in Sources */,
-				1B143AAD298F9085008B8726 /* User.swift in Sources */,
 				1B6299D8299037BA0022C529 /* RestManager.swift in Sources */,
 				1B6299C3298FA0810022C529 /* ImagePicker+Extensions.swift in Sources */,
 				1BF6F475298DF08000641526 /* SignInViewScreen.swift in Sources */,

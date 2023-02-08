@@ -12,6 +12,7 @@ import UIKit
 protocol SignUpProtocol: AnyObject {
     func actionSendButton()
     func actionPickerProfilePhoto()
+    func datePickerValueChanged()
 }
 
 class SignUpViewScreen: UIView {
@@ -66,7 +67,22 @@ class SignUpViewScreen: UIView {
         textField.placeholder = "Nome Completo"
         let placeholderColor = UIColor.white.withAlphaComponent(0.7)
         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
-        textField.isSecureTextEntry = true
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: textField.frame.height - 1, width: textField.frame.width, height: 1)
+        bottomLine.backgroundColor = UIColor.white.cgColor
+        textField.layer.addSublayer(bottomLine)
+        return textField
+    }()
+    
+    lazy var CpfTextField: UITextField = {
+        let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 280, height: 30))
+        textField.borderStyle = .none
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.textColor = .white
+        textField.textAlignment = .natural
+        textField.placeholder = "CPF"
+        let placeholderColor = UIColor.white.withAlphaComponent(0.7)
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: textField.frame.height - 1, width: textField.frame.width, height: 1)
         bottomLine.backgroundColor = UIColor.white.cgColor
@@ -99,7 +115,6 @@ class SignUpViewScreen: UIView {
         textField.placeholder = "E-Mail"
         let placeholderColor = UIColor.white.withAlphaComponent(0.7)
         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
-        textField.isSecureTextEntry = true
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: textField.frame.height - 1, width: textField.frame.width, height: 1)
         bottomLine.backgroundColor = UIColor.white.cgColor
@@ -113,7 +128,7 @@ class SignUpViewScreen: UIView {
         textField.font = UIFont.systemFont(ofSize: 20)
         textField.textColor = .white
         textField.textAlignment = .natural
-        textField.placeholder = "Senha"
+        textField.placeholder = "Insira uma senha"
         let placeholderColor = UIColor.white.withAlphaComponent(0.7)
         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.isSecureTextEntry = true
@@ -124,17 +139,39 @@ class SignUpViewScreen: UIView {
         return textField
     }()
     
+    lazy var ConfirmpasswordTextField: UITextField = {
+        let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 280, height: 30))
+        textField.borderStyle = .none
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.textColor = .white
+        textField.textAlignment = .natural
+        textField.placeholder = "Confirme sua senha"
+        let placeholderColor = UIColor.white.withAlphaComponent(0.7)
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
+        textField.isSecureTextEntry = true
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: textField.frame.height - 1, width: textField.frame.width, height: 1)
+        bottomLine.backgroundColor = UIColor.white.cgColor
+        textField.layer.addSublayer(bottomLine)
+        return textField
+    }()
+    
+    lazy var birthday: UIDatePicker = {
+        let label = UILabel()
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        datePicker.frame = CGRect(x: 0, y: 0, width: 300, height: 200)
+        datePicker.backgroundColor = UIColor.yellow
+        return datePicker
+    }()
+    
     lazy var ProfileImagePicker: UIButton = {
         let takePictureButton = UIButton()
-        takePictureButton.setTitle("Tirar Foto", for: .normal)
+        takePictureButton.setTitle("insira sua foto de perfil", for: .normal)
         takePictureButton.setTitleColor(.white, for: .normal)
         takePictureButton.addTarget(self, action: #selector(takePicture), for: .touchUpInside)
         return takePictureButton
-    }()
-    
-    lazy var profileImage: UIImageView = {
-        let image = UIImageView()
-        return image
     }()
     
     lazy var sendButton: UIButton = {
@@ -164,6 +201,10 @@ class SignUpViewScreen: UIView {
         self.delegate?.actionPickerProfilePhoto()
     }
     
+    @objc public func datePickerValueChanged() {
+        self.delegate?.actionSendButton()
+    }
+    
     func configSubViews() {
         addSubview(BackGroundImage)
         addSubview(BackGroundView)
@@ -171,11 +212,13 @@ class SignUpViewScreen: UIView {
         addSubview(logoImage)
         addSubview(logoLabel)
         signInView.addSubview(completeNameTextField)
+        signInView.addSubview(CpfTextField)
         signInView.addSubview(userTextField)
         signInView.addSubview(emailTextField)
         signInView.addSubview(passwordTextField)
+        signInView.addSubview(ConfirmpasswordTextField)
+        signInView.addSubview(birthday)
         signInView.addSubview(ProfileImagePicker)
-        signInView.addSubview(profileImage)
         signInView.addSubview(sendButton)
         
     }
@@ -198,43 +241,60 @@ class SignUpViewScreen: UIView {
             make.edges.equalToSuperview()
         }
         signInView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.height.equalTo(450)
+            make.top.equalTo(logoLabel.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(550)
             make.width.equalTo(370)
         }
         completeNameTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(signInView.snp.top).offset(30)
+            make.top.equalTo(signInView.snp.top).offset(25)
+            make.height.equalTo(30)
+            make.width.equalTo(280)
+        }
+        CpfTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(completeNameTextField.snp.bottom).offset(25)
             make.height.equalTo(30)
             make.width.equalTo(280)
         }
         userTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(completeNameTextField.snp.bottom).offset(30)
+            make.top.equalTo(CpfTextField.snp.bottom).offset(25)
             make.height.equalTo(30)
             make.width.equalTo(280)
         }
         emailTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(userTextField.snp.bottom).offset(30)
+            make.top.equalTo(userTextField.snp.bottom).offset(25)
             make.height.equalTo(30)
             make.width.equalTo(280)
         }
         passwordTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(emailTextField.snp.bottom).offset(30)
+            make.top.equalTo(emailTextField.snp.bottom).offset(25)
             make.height.equalTo(30)
             make.width.equalTo(280)
         }
+        ConfirmpasswordTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(passwordTextField.snp.bottom).offset(25)
+            make.height.equalTo(30)
+            make.width.equalTo(280)
+        }
+        birthday.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(ConfirmpasswordTextField.snp.bottom).offset(25)
+        }
         ProfileImagePicker.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
+            make.top.equalTo(birthday.snp.bottom).offset(25)
             make.height.equalTo(30)
             make.width.equalTo(280)
         }
         sendButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(ProfileImagePicker.snp.bottom).offset(30)
+            make.top.equalTo(ProfileImagePicker.snp.bottom).offset(25)
             make.width.equalTo(120)
         }
     }
